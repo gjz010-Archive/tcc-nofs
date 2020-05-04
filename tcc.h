@@ -67,7 +67,8 @@ extern long double strtold (const char *__nptr, char **__endptr);
 #  define strtoull _strtoui64
 # endif
 # ifdef LIBTCC_AS_DLL
-#  define LIBTCCAPI __declspec(dllexport)
+//#  define LIBTCCAPI __declspec(dllexport)
+#  define LIBTCCAPI
 #  define PUB_FUNC LIBTCCAPI
 # endif
 # define inp next_inp /* inp is an intrinsic on msvc/mingw */
@@ -1664,6 +1665,21 @@ ST_FUNC void gen_makedeps(TCCState *s, const char *target, const char *filename)
 #endif
 /********************************************************/
 
+#define read uvfs_read
+#define write uvfs_write
+#define open uvfs_open
+#define close uvfs_close
+#define dup uvfs_dup
+#define lseek uvfs_lseek
+
+int uvfs_open(const char *pathname,int flags,...);
+int uvfs_write(int fd, const void* buf, unsigned int count);
+int uvfs_read(int fd, void* buf, unsigned int count);
+int uvfs_close(int fd);
+off_t uvfs_lseek(int fd, off_t offset, int whence);
+int uvfs_dup(int fd);
 
 
 #endif /* _TCC_H */
+
+

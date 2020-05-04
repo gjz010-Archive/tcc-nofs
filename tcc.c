@@ -17,6 +17,27 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+#ifdef RENAMED_TCC
+#define tcc_add_file r_tcc_add_file
+#define tcc_add_include_path r_tcc_add_include_path
+#define tcc_add_library r_tcc_add_library
+#define tcc_add_library_path r_tcc_add_library_path
+#define tcc_add_symbol r_tcc_add_symbol
+#define tcc_add_sysinclude_path r_tcc_add_sysinclude_path
+#define tcc_compile_string r_tcc_compile_string
+#define tcc_define_symbol r_tcc_define_symbol
+#define tcc_delete r_tcc_delete
+#define tcc_get_symbol r_tcc_get_symbol
+#define tcc_new r_tcc_new
+#define tcc_output_file r_tcc_output_file
+#define tcc_relocate r_tcc_relocate
+#define tcc_run r_tcc_run
+#define tcc_set_error_func r_tcc_set_error_func
+#define tcc_set_lib_path r_tcc_set_lib_path
+#define tcc_set_options r_tcc_set_options
+#define tcc_set_output_type r_tcc_set_output_type
+#define tcc_undefine_symbol r_tcc_undefine_symbol
+#endif
 
 #include "tcc.h"
 #if ONE_SOURCE
@@ -243,8 +264,10 @@ static unsigned getclock_ms(void)
 #endif
 }
 
+void initialize_uvfs();
 int main(int argc0, char **argv0)
 {
+    initialize_uvfs();
     TCCState *s;
     int ret, opt, n = 0, t = 0;
     unsigned start_time = 0;

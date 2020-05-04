@@ -1677,7 +1677,7 @@ static int pe_load_def(TCCState *s1, int fd)
     int fp_p;
 
     //fp = fdopen(dup(fd), "rb");
-    fp_p = dup (fd);
+    fp_p = fd;
     while (dgets(line, sizeof line, fp_p))
     {
         p = trimfront(trimback(line, strchr(line, 0)));
@@ -1721,7 +1721,7 @@ static int pe_load_def(TCCState *s1, int fd)
     }
     ret = 0;
 quit:
-    close(fp_p);
+    //close(fp_p);
     return ret;
 }
 

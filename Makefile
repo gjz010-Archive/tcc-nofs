@@ -187,7 +187,7 @@ $(X)%.o : %.c $(LIBTCC_INC)
 	$(CC) -o $@ -c $< $(DEFINES) $(CFLAGS)
 
 # additional dependencies
-$(X)tcc.o : tcctools.c io.c
+$(X)tcc.o : tcctools.c
 
 # Host Tiny C Compiler
 tcc$(EXESUF): tcc.o $(LIBTCC)
@@ -217,7 +217,7 @@ libtcc.so: LDFLAGS+=-fPIC
 
 # windows dynamic libtcc library
 libtcc.dll : $(LIBTCC_OBJ)
-	$(CC) -shared -o $@ $^ $(LDFLAGS)
+	$(CC) -shared -L./  -o $@ libuvfs.a $^  $(LDFLAGS)
 libtcc.dll : DEFINES += -DLIBTCC_AS_DLL
 
 # import file for windows libtcc.dll
